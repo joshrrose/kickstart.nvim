@@ -1,7 +1,3 @@
--- fix netrw to work as expected
--- allows you to copy files into different dirs without weird errors
-vim.g.netrw_keepdir = 0
---
 --[[
 
 =====================================================================
@@ -562,7 +558,6 @@ require('lazy').setup({
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-          vim.keymap.set('i', '<C-]>', vim.lsp.buf.declaration, { desc = 'Move focus to the left window' })
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -576,8 +571,6 @@ require('lazy').setup({
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
-
-          map('gd', vim.lsp.buf.signature_help, '[G]lance [d]efinition')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -1032,5 +1025,21 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
---
---
+
+-- My Personal keybinds
+-- fix netrw to work as expected
+-- allows you to copy files into different dirs without weird errors
+vim.g.netrw_keepdir = 0
+
+-- easier remap for copy into system clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[y] copy into system clipboard' })
+vim.keymap.set('n', '<leader>Y', '"+Y', { desc = '[Y] copy into system clipboard?' })
+
+-- git blame
+vim.keymap.set('n', 'gb', '<cmd>Git blame<CR>', { desc = '[g]it [b]lame' })
+vim.keymap.set({ 'i', 'n' }, '<C-]>', vim.lsp.buf.declaration, { desc = 'goto declaration' })
+
+-- sets border but only for lsp hover so that it doesn't interfere with telescope
+vim.keymap.set('n', 'K', function()
+  vim.lsp.buf.hover { border = 'rounded' }
+end)
