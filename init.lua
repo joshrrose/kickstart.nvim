@@ -1,3 +1,8 @@
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.spell = true
+vim.o.spelllang = 'en_us'
 --[[
 
 =====================================================================
@@ -783,7 +788,9 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        json = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -979,6 +986,18 @@ require('lazy').setup({
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
 
+  -- jrose add copilot here
+  {
+    'CopilotC-Nvim/CopilotChat.nvim',
+    dependencies = {
+      { 'nvim-lua/plenary.nvim', branch = 'master' },
+    },
+    build = 'make tiktoken',
+    opts = {
+      -- See Configuration section for options
+    },
+  },
+
   -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
   --
   --  Here are some example plugins that I've included in the Kickstart repository.
@@ -1034,10 +1053,12 @@ vim.g.netrw_keepdir = 0
 -- easier remap for copy into system clipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[y] copy into system clipboard' })
 vim.keymap.set('n', '<leader>Y', '"+Y', { desc = '[Y] copy into system clipboard?' })
+vim.keymap.set('n', '<leader>p', '"+p', { desc = '[p] paste from system clipboard' })
 
 -- git blame
 vim.keymap.set('n', 'gb', '<cmd>Git blame<CR>', { desc = '[g]it [b]lame' })
 vim.keymap.set({ 'i', 'n' }, '<C-]>', vim.lsp.buf.declaration, { desc = 'goto declaration' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'show [e]rror popup' })
 
 -- sets border but only for lsp hover so that it doesn't interfere with telescope
 vim.keymap.set('n', 'K', function()
