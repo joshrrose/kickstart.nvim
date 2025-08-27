@@ -441,6 +441,24 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      -- jrose custom
+      vim.keymap.set('n', '<leader>se', function()
+        vim.ui.input({ prompt = 'Glob pattern: ' }, function(input)
+          if input then
+            require('telescope.builtin').live_grep { glob_pattern = input }
+          end
+        end)
+      end, { desc = '[S]earch grep with file [E]xtension' })
+
+      vim.keymap.set('n', '<leader>scf', function()
+        local dir = vim.fn.expand '%:p:h'
+        require('telescope.builtin').find_files { cwd = dir }
+      end, { desc = '[S]earch [C]urrent directory [F]ile Names' })
+
+      vim.keymap.set('n', '<leader>scg', function()
+        local dir = vim.fn.expand '%:p:h'
+        require('telescope.builtin').live_grep { cwd = dir }
+      end, { desc = '[S]earch [C]urrent directory [G]rep' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
