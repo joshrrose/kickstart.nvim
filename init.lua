@@ -95,10 +95,10 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>qq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' }) -- all files
+vim.keymap.set('n', '<leader>qq', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list' }) -- all files
 vim.keymap.set('n', '<leader>qn', '<cmd>cnext<CR>', { desc = 'Goto [Q]uickfix [N]ext' })
 vim.keymap.set('n', '<leader>qp', '<cmd>cprev<CR>', { desc = 'Goto [Q]uickfix [P]revious' })
-vim.keymap.set('n', '<leader>lq', vim.diagnostic.setqflist, { desc = 'Open diagnostic [L]ocation list' }) -- local file only
+vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [L]ocation list' }) -- local file only
 vim.keymap.set('n', '<leader>ln', '<cmd>lnext<CR>', { desc = 'Goto [L]oaction [N]ext' })
 vim.keymap.set('n', '<leader>lp', '<cmd>lprev<CR>', { desc = 'Goto [L]ocation [P]revious' })
 
