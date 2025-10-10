@@ -95,9 +95,12 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>qq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>qn', '<cmd>lnext<CR>', { desc = 'Goto [Q]uickfix [N]ext' })
-vim.keymap.set('n', '<leader>qp', '<cmd>lprev<CR>', { desc = 'Goto [Q]uickfix [P]revious' })
+vim.keymap.set('n', '<leader>qq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' }) -- all files
+vim.keymap.set('n', '<leader>qn', '<cmd>cnext<CR>', { desc = 'Goto [Q]uickfix [N]ext' })
+vim.keymap.set('n', '<leader>qp', '<cmd>cprev<CR>', { desc = 'Goto [Q]uickfix [P]revious' })
+vim.keymap.set('n', '<leader>lq', vim.diagnostic.setqflist, { desc = 'Open diagnostic [L]ocation list' }) -- local file only
+vim.keymap.set('n', '<leader>ln', '<cmd>lnext<CR>', { desc = 'Goto [L]oaction [N]ext' })
+vim.keymap.set('n', '<leader>lp', '<cmd>lprev<CR>', { desc = 'Goto [L]ocation [P]revious' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -205,6 +208,18 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
+  },
+
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -1004,3 +1019,5 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'show [e]rr
 vim.keymap.set('n', 'K', function()
   vim.lsp.buf.hover { border = 'rounded' }
 end)
+
+vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'Open parent directory with Oil' })
