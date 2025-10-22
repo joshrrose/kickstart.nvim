@@ -637,7 +637,7 @@ require('lazy').setup({
               check = {
                 allFeatures = true,
                 command = 'clippy',
-                extraArgs = { '--', '--no-deps', '-W', 'clippy::all' },
+                extraArgs = { '--', '--no-deps', '-D', 'warnings' },
               },
             },
           },
