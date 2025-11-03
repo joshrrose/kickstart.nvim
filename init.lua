@@ -632,10 +632,10 @@ require('lazy').setup({
           settings = {
             ['rust-analyzer'] = {
               cargo = {
-                allFeatures = true,
+                features = 'all',
               },
               check = {
-                allFeatures = true,
+                features = 'all',
                 command = 'clippy',
                 extraArgs = { '--', '--no-deps', '-D', 'warnings' },
               },
