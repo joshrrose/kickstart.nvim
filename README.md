@@ -1,4 +1,9 @@
+
+
 # kickstart.nvim
+
+jrose directions:
+git clone <this repo> ./config/nvim
 
 ## Introduction
 
