@@ -209,6 +209,7 @@ require('lazy').setup({
       },
     },
   },
+  { 'tpope/vim-fugitive' },
 
   {
     'stevearc/oil.nvim',
@@ -940,18 +941,18 @@ require('lazy').setup({
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
-
-  -- jrose add copilot here
-  {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    dependencies = {
-      { 'nvim-lua/plenary.nvim', branch = 'master' },
-    },
-    build = 'make tiktoken',
-    opts = {
-      -- See Configuration section for options
-    },
-  },
+    --
+    --
+    --
+    --
+    -- jrose markdown renderer
+    {
+      'MeanderingProgrammer/render-markdown.nvim',
+      dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+      opts = {},
+    }
+    --
+    --
 
   -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
   --
@@ -1012,6 +1013,8 @@ vim.keymap.set('n', '<leader>p', '"+p', { desc = '[p] paste from system clipboar
 
 -- git blame
 vim.keymap.set('n', 'gb', '<cmd>Git blame<CR>', { desc = '[g]it [b]lame' })
+vim.keymap.set('n', 'gd', '<cmd>Gdiffsplit<CR>', { desc = '[g]it [d]iff' })
+
 vim.keymap.set({ 'i', 'n' }, '<C-]>', vim.lsp.buf.declaration, { desc = 'goto declaration' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'show [e]rror popup' })
 
